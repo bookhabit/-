@@ -11,7 +11,7 @@ class stack_class :
     def push(self,x):
         self.stack.insert(0,x)
     
-    def pop(self):
+    def top_remove(self):
         if self.empty() == True:
             pass
         else: 
@@ -35,6 +35,12 @@ class stack_class :
             # print(index,value)
             if index == num:
                 return value
+
+    def remove_recent_search(self,num):
+        for index,value in enumerate(self.stack):
+            # print(index,value)
+            if index == num:
+                self.stack.pop(index)
 
 st = stack_class()
 
@@ -99,7 +105,15 @@ while True:
                 recent_search(num-1) # 최근검색어 목록에서 인덱스0으로 시작하는 것 막기위해 +1 해줬으니 여기서는 -1 해주기
 
             elif user_search == "2": # 최근검색어 번호로 목록에서 지우기
-                pass
+                print("---------------------------")
+                num = int(input("삭제할 최근검색어 번호를 입력하세요: "))
+                if st.empty() == True:
+                    print("최근 검색어 목록이 없습니다.")
+                    break
+                elif len(st.stack) < num-1:
+                    print("최근 검색어 목록에 있는 번호를 입력해주세요: ")
+                else :
+                    st.remove_recent_search(num-1)
             
             elif user_search == "3":  # 최근검색어 목록 창 닫기
                 break  
